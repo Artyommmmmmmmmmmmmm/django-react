@@ -1,5 +1,10 @@
 import React from 'react';
 import axios from 'axios';
+import {Routes, Route, Link} from 'react-router-dom'
+import Foods from './components/Foods'
+import Food from './components/Food'
+
+
 
 class App extends React.Component {
     state = { details:[], }
@@ -22,11 +27,14 @@ class App extends React.Component {
             <>
                 <div>{this.state.details.map((output, id) => (
                     <div key={id}> 
-                        <div> {output.name}</div>
-                        <div> {output.category}</div>
+                        <Link to={'category/?category=' + output.name}> { output.name } </Link>
                     </div>
                 ))}
                 </div>
+                <Routes>
+                    <Route path='/category' element={ <Foods/> }/>
+                    <Route path='/food/*' element={ <Food/> }/>
+                </Routes>
             </>
         )
     }}
